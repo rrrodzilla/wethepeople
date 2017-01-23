@@ -1,25 +1,28 @@
 {
-  "name": "wethepeople",
-  "description": "An empty new project",
-  "slug": "wethepeople",
-  "privacy": "public",
+  "name": "We The People",
+  "description": "A Trump Cabinet Tinder Clone.",
+  "slug": "WethePeople",
   "sdkVersion": "12.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
-  "primaryColor": "#cccccc",
-  "iconUrl": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+  "primaryColor": "#F3EAB3",
+  "iconUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
   "notification": {
-    "iconUrl": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
+    "iconUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
     "color": "#000000"
   },
   "loading": {
-    "iconUrl": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
-    "hideExponentText": false
+    "backgroundImageUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
+    "hideExponentText": true,
+    "backgroundColor" : "#FFFFFF"
   },
   "packagerOpts": {
-    "assetExts": ["ttf", "mp4"]
+    "assetExts": [
+      "ttf"
+    ]
   },
   "ios": {
-    "supportsTablet": true
-  }
+    "bundleIdentifier": "org.neyborly.WeThePeople"
+  },
+  "facebookScheme":"fb657094567796730"
 }

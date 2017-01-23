@@ -1,14 +1,36 @@
 {
-  "name": "wethepeople",
-  "version": "0.0.0",
-  "description": "Hello Exponent!",
-  "author": null,
+  "name": "We The People",
+  "version": "0.0.1",
   "private": true,
-  "main": "main.js",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
   "dependencies": {
-    "exponent": "~12.0.3",
-    "@exponent/vector-icons": "~2.0.3",
+    "@exponent/ex-navigation": "^2.7.1",
+    "@exponent/vector-icons": "^4.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "date-fns": "^1.27.0",
+    "exponent": "~12.0.0",
     "react": "~15.3.2",
-    "react-native": "git+https://github.com/exponentjs/react-native#sdk-12.0.0"
-  }
+    "react-native": "github:exponentjs/react-native#sdk-12.0.0",
+    "react-native-elements": "^0.9.2",
+    "react-native-vector-icons": "^4.0.0",
+    "react-redux": "^5.0.2",
+    "redux-logger": "^2.7.4",
+    "redux-storage": "^4.1.2",
+    "redux-storage-engine-reactnativeasyncstorage": "^1.0.5",
+    "redux-thunk": "^2.2.0",
+    "stripe": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-jest": "17.0.2",
+    "babel-preset-react-native": "1.9.0",
+    "flow-bin": "^0.38.0",
+    "jest": "17.0.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "main": ""
 }
