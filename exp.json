@@ -1,0 +1,28 @@
+{
+  "name": "We The People",
+  "description": "A Trump Cabinet Tinder Clone.",
+  "slug": "WethePeople",
+  "sdkVersion": "12.0.0",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "primaryColor": "#F3EAB3",
+  "iconUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
+  "notification": {
+    "iconUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
+    "color": "#000000"
+  },
+  "loading": {
+    "backgroundImageUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
+    "hideExponentText": true,
+    "backgroundColor" : "#FFFFFF"
+  },
+  "packagerOpts": {
+    "assetExts": [
+      "ttf"
+    ]
+  },
+  "ios": {
+    "bundleIdentifier": "org.neyborly.WeThePeople"
+  },
+  "facebookScheme":"fb657094567796730"
+}

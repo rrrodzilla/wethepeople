@@ -1,0 +1,23 @@
+{
+    "news": [
+    {
+        "Headline" : "Muslim Harassment in New Mexico",
+        "Content" : "Muslim shopper wearing a hijab harassed by woman at grocery",
+        "Image" : "https://d3el53au0d7w62.cloudfront.net/wp-content/uploads/2016/11/25/a01_jd_26nov_smiths.jpg",
+        "Url" : "https://www.abqjournal.com/896172/muslim-shopper-wearing-a-hijab-harassed-by-woman-at-grocery.html",
+        "Location" : "New Mexico"
+    }, {
+        "Headline" : "Racial Hatecrime in CO",
+        "Content" : "‘KKK N----r': Home vandalized with hate speech in Aurora while family was inside",
+        "Image" : "http://media.thedenverchannel.com/photo/2016/11/25/Racist%20spray%20paint%20Pic%20Blurred_1480103907112_50371570_ver1.0_640_480.jpg",
+        "Url" : "http://www.thedenverchannel.com/news/front-range/aurora/kkk-n-r-home-vandalized-with-hate-speech-in-aurora-while-family-was-inside",
+        "Location" : "Colorado"
+    }, {
+        "Headline" : "Anti-Muslim Hate Speech",
+        "Content" : "Pennsylvania Mosque Target Of Anti-Muslim Hate Speech",
+        "Image" : "https://cbsphilly.files.wordpress.com/2016/11/untitled67.jpg",
+        "Url" : "http://philadelphia.cbslocal.com/2016/11/28/pennsylvania-mosque-target-of-anti-muslim-hate-speech/",
+        "Location" : "Pennsylvania"
+    }
+]
+}
