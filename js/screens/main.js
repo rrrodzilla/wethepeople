@@ -14,6 +14,7 @@ import {
     Easing,
     Alert,
     TextInput,
+    Linking,
     Image,
     View,
     Dimensions,
@@ -39,6 +40,7 @@ class Main extends Component {
 
         this.yesText = "'Murica'!";
         this.noText = "Nope!"
+        this.opacityFinal = new Animated.Value(0);
         this.panProfile = new Animated.ValueXY();
         this.opacityProfile = new Animated.Value(1);
         this.panAlert = new Animated.ValueXY({x: 0, y: -40});
@@ -192,6 +194,14 @@ class Main extends Component {
 
                 });
 
+            } else {
+                Animated
+                    .timing(this.opacityFinal, {
+                    toValue: 1,
+                    duration: 750
+                })
+                    .start()
+
             }
         });
     }
@@ -234,6 +244,10 @@ class Main extends Component {
         }
     }
 
+    renderFinalCardStyle() {
+        return {opacity: this.opacityFinal}
+    }
+
     render() {
 
         const {state, actions} = this.props;
@@ -246,6 +260,41 @@ class Main extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.upperContainer}>
+                    <Animated.View
+                        style={[
+                        styles.finalCard, this.renderFinalCardStyle()
+                    ]}>
+                        <Text style={styles.profileRole}>Thank you for playing.</Text>
+                        <Text
+                            style={[
+                            styles.profileHeaders, {
+                                textAlign: 'center'
+                            }
+                        ]}>If
+                            you found any of the quotes attributed to our 45th President offensive or
+                            disturbing in any way, we encourage you to take action by joining the Safetypin
+                            Foundation when we launch.</Text>
+                        <Text
+                            style={[
+                            styles.profileHeaders, {
+                                textAlign: 'center'
+                            }
+                        ]}>Sign up for info here:</Text>
+                        <TouchableOpacity
+                            onPress={() => Linking.openURL("http://signup.staysafetypin.us")}>
+                            <Text
+                                style={[
+                                styles.profileHeaders, {
+                                    textAlign: 'center',
+                                    ...Font.style('lato-black'),
+                                    fontSize: 16,
+                                    marginVertical:15,
+                                    color: colors.red
+                                }
+                            ]}>http://signup.staysafetypin.us</Text>
+                        </TouchableOpacity>
+
+                    </Animated.View>
                     {this.renderCards()}
                     <Animated.View
                         style={[
@@ -306,6 +355,7 @@ const styles = StyleSheet.create({
         borderWidth: .5,
         borderColor: colors.black,
         margin: 15,
+        backgroundColor: '#99BADB',
         marginVertical: 25,
         borderRadius: 5,
         shadowColor: colors.black,
@@ -331,8 +381,8 @@ const styles = StyleSheet.create({
     profileComment: {
         ...Font.style('lato-regular'),
         color: colors.blue,
-        marginHorizontal:15,
-        marginBottom:15,
+        marginHorizontal: 15,
+        marginBottom: 15,
         fontSize: 18
     },
     profileRole: {
@@ -349,5 +399,9 @@ const styles = StyleSheet.create({
     swipeAlertText: {
         ...Font.style('lato-black'),
         fontSize: 48
+    },
+    finalCard: {
+        marginHorizontal: 30,
+        alignItems: 'center'
     }
 });
