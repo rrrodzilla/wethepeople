@@ -37,8 +37,8 @@ class Main extends Component {
     constructor(props) {
         super(props);
 
-        this.yesText = "Alright then!";
-        this.noText = "Hell nope!"
+        this.yesText = "'Murica'!";
+        this.noText = "Nope!"
         this.panProfile = new Animated.ValueXY();
         this.opacityProfile = new Animated.Value(1);
         this.panAlert = new Animated.ValueXY({x: 0, y: -40});
@@ -157,28 +157,33 @@ class Main extends Component {
     }
 
     updateProfile(direction) {
-        this
-            .opacityProfile
-            .setValue(0);
+        Animated
+            .timing(this.opacityProfile, {
+            toValue: 0,
+            duration: 150
+        })
+            .start();
+
         Animated.timing(this.panProfile, {
             toValue: {
                 x: 0,
                 y: 500
             },
-            duration: 150
+            duration: 500
         }).start(() => {
             Animated.timing(this.panProfile, {
                 toValue: {
                     x: 0,
                     y: 0
                 },
+                delay:500,
                 easing: Easing.out(Easing.exp),
                 duration: 750
             }).start(() => {
                 Animated
                     .timing(this.opacityProfile, {
                     toValue: 1,
-                    duration: 150
+                    duration: 200
                 })
                     .start()
 
@@ -248,7 +253,7 @@ class Main extends Component {
                     styles.profile, this.renderProfileStyle()
                 ]}>
                     <View style={styles.profileItems}>
-                        <Text style={styles.profileHeaders}>Summary:</Text>
+                        <Text style={styles.profileHeaders}>Summary</Text>
                         <Text style={styles.profileComment}>{currentCard.comment}</Text>
                     </View>
                 </Animated.View>
@@ -285,11 +290,12 @@ const styles = StyleSheet.create({
     },
     profile: {
         flexDirection: 'column',
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
         borderWidth: .5,
         borderColor: colors.black,
+        padding:-30,
         margin: 15,
         marginVertical: 10,
         borderRadius: 5,
@@ -303,21 +309,21 @@ const styles = StyleSheet.create({
     },
     profileItems: {
         flexDirection: 'column',
-        padding: 40,
-        paddingTop: 5,
-        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent:'center',
         flex: 1
     },
     profileHeaders: {
-        ...Font.style('lato-semibold'),
+        ...Font.style('lato-light'),
         color: colors.blue,
+        margin:15,
         letterSpacing: 1,
-        fontSize: 18
+        fontSize: 16
     },
     profileComment: {
         ...Font.style('lato-regular'),
         color: colors.blue,
-        fontSize: 16
+        fontSize: 18
     },
     swipeAlert: {
         alignSelf: 'center',
