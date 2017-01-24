@@ -17,6 +17,7 @@ import {
     Image,
     InteractionManager,
     View,
+    Easing,
     Dimensions
 } from 'react-native';
 
@@ -57,7 +58,8 @@ class Card extends Component {
             Animated
                 .timing(this.rotation, {
                 toValue: 1,
-                duration: 1000
+                easing:Easing.bounce,
+                duration: 300
             })
                 .start();
         }
@@ -113,7 +115,7 @@ class Card extends Component {
                             },
                             friction: 3
                         }).start(() => {
-                            // this.setState({dragging: false});
+                            this.setState({dragging: false});
                         });
                     }
                 }
@@ -418,12 +420,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 25,
         width: (width * .9),
-        backgroundColor: 'rgba(224,22,43,.55)',
+        backgroundColor: 'rgba(224,22,43,.35)',
         marginTop: -47
     },
     headlineText: {
         marginLeft: 15,
-        ...Font.style('lato-semibold'),
+        ...Font.style('lato-black'),
         fontSize:13,
         opacity: .95,
         flex: 1,
