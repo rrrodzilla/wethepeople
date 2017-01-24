@@ -52,7 +52,7 @@ export function login(state) {
 }
 
 export function setFirstLoad(hasLoaded) {
-  return {type: types.LOGIN, loaded: hasLoaded};
+  return {type: types.IS_FIRST_LOAD, loaded: hasLoaded};
 }
 
 

@@ -22,7 +22,11 @@ export const isFirstLoad = CreateReducer({}, {
     },
     [types.IS_FIRST_LOAD](state, action) {
         return action.loaded;
+    },
+    ["REDUX_STORAGE_LOAD"](state, action) {
+        return action.payload.wethepeople.isFirstLoad;
     }
+
 });
 
 export const presidentialQuotes = CreateReducer({}, {

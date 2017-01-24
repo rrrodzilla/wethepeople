@@ -86,6 +86,10 @@ class App extends React.Component {
         fonts: [
           ...MaterialIcons.font, {
             'lato-black': require('../assets/fonts/Lato-Black.ttf')
+          },{
+            'lato-blackitalic': require('../assets/fonts/Lato-BlackItalic.ttf')
+          },{
+            'lato-thinitalic': require('../assets/fonts/Lato-ThinItalic.ttf')
           }, {
             'lato-light': require('../assets/fonts/Lato-Light.ttf')
           }, {

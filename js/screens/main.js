@@ -38,17 +38,26 @@ class Main extends Component {
     constructor(props) {
         super(props);
 
-        this.yesText = "'Murica'!";
+        this.yesText = "Ok then!";
         this.noText = "Nope!"
         this.opacityFinal = new Animated.Value(0);
         this.panProfile = new Animated.ValueXY();
         this.opacityProfile = new Animated.Value(1);
-        this.panAlert = new Animated.ValueXY({x: 0, y: -40});
+        this.panAlert = new Animated.ValueXY({x: 0, y: -120});
         this.opacityAlert = new Animated.Value(0);
         this.scaleAlert = new Animated.Value(0);
+        this.scaleOverlay = new Animated.Value(0);
+        this.opacityOverlay = new Animated.Value(0);
+        this.showInstructions = this.props.isFirstLoad;
+        this.overlayIndex = -1;
         this.state = {
             alertText: ""
+        };
+
+        if (this.props.isFirstLoad) {
+            this.showOverlay();
         }
+
     }
 
     static route = {
@@ -83,6 +92,66 @@ class Main extends Component {
         }
     }
 
+    componentWillMount() {
+        console.disableYellowBox = true;
+
+    }
+
+    showOverlay() {
+        this.overlayIndex = 10;
+        Animated.sequence([
+            Animated.timing(this.scaleOverlay, {
+                toValue: 1,
+                duration: 1
+            }),
+            Animated.timing(this.opacityOverlay, {
+                toValue: .9,
+                duration: 250,
+                easing: Easing.ease
+            })
+        ]).start();
+    }
+
+    hideOverlay() {
+        Animated.sequence([
+            Animated.timing(this.opacityOverlay, {
+                toValue: 0,
+                duration: 250
+            }),
+            Animated.timing(this.scaleOverlay, {
+                toValue: 0,
+                duration: 1,
+                easing: Easing.ease
+            })
+        ]).start(() => {
+            this.overlayIndex = -10;
+            this
+                .props
+                .actions
+                .setFirstLoad(false);
+        });
+    }
+    _getOverlayStyle() {
+        return {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: height - 50,
+            width: width,
+            zIndex: this.overlayIndex,
+            opacity: this.opacityOverlay,
+            padding: 40,
+            backgroundColor: colors.blue,
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [
+                {
+                    scale: this.scaleOverlay
+                }
+            ]
+
+        }
+    }
     renderCards() {
         return this
             .props
@@ -117,7 +186,7 @@ class Main extends Component {
             Animated.timing(this.panAlert, {
                 toValue: {
                     x: 0,
-                    y: -40
+                    y: -120
                 },
                 duration: 1000
             })
@@ -288,7 +357,7 @@ class Main extends Component {
                                     textAlign: 'center',
                                     ...Font.style('lato-black'),
                                     fontSize: 16,
-                                    marginVertical:15,
+                                    marginVertical: 15,
                                     color: colors.red
                                 }
                             ]}>http://signup.staysafetypin.us</Text>
@@ -316,6 +385,26 @@ class Main extends Component {
                         <Text style={styles.profileComment}>{currentCard.comment}</Text>
                     </View>
                 </Animated.View>
+                <Animated.View
+                    name="overlay"
+                    style={this._getOverlayStyle()}
+                    pointerEvents={((!this.props.isFirstLoad)
+                    ? 'none'
+                    : 'auto')}>
+                    <TouchableOpacity onPress={() => this.hideOverlay()}>
+                        <Text style={styles.overlayInstructionsHeading}>Play Senator!</Text>
+                        <Text style={styles.overlayInstructions}>Swipe right to vote for the nominee.</Text>
+                        <Text style={styles.overlayInstructions}>Swipe left to withhold your vote for the nominee.</Text>
+                        <Text style={styles.overlayTinyInstructions}>*currently no data is being persisted. Coming soon!</Text>
+                        <Text
+                            style={[
+                            styles.overlayInstructions, {
+                                fontSize: 20
+                            }
+                        ]}>(tap anywhere to dismiss)</Text>
+                    </TouchableOpacity>
+                </Animated.View>
+
             </View>
         );
     }
@@ -323,7 +412,7 @@ class Main extends Component {
 /*************** Needed for redux mappings on this page  ********************/
 //currently only mapping to the user prop which we use for display on this page
 function mapStateToProps(state, ownProps) {
-    return {quotes: state.wethepeople.presidentialQuotes, cards: state.wethepeople.cards, swipedDirection: state.wethepeople.swipedDirection, swiping: state.wethepeople.swiping};
+    return {isFirstLoad: state.wethepeople.isFirstLoad, quotes: state.wethepeople.presidentialQuotes, cards: state.wethepeople.cards, swipedDirection: state.wethepeople.swipedDirection, swiping: state.wethepeople.swiping};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -403,5 +492,21 @@ const styles = StyleSheet.create({
     finalCard: {
         marginHorizontal: 30,
         alignItems: 'center'
+    },
+    overlayInstructionsHeading: {
+        ...Font.style('lato-blackitalic'),
+        color: colors.white,
+        fontSize: 30
+    },
+    overlayInstructions: {
+        ...Font.style('lato-italic'),
+        color: colors.white,
+        marginVertical: 10,
+        fontSize: 24
+    },
+    overlayTinyInstructions: {
+        ...Font.style('lato-thinitalic'),
+        color: colors.white,
+        fontSize: 16
     }
 });
