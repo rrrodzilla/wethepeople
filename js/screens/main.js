@@ -317,6 +317,7 @@ const styles = StyleSheet.create({
         color: colors.blue,
         marginBottom:15,
         letterSpacing: 1,
+        fontSize: 18
     },
     profileComment: {
         ...Font.style('lato-regular'),
