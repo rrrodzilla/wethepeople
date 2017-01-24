@@ -71,13 +71,13 @@ class Home extends Component {
               We the People
             </Text>
             <Text style={styles.upperInstructions}>
-              A single swipe can change our country.
+              The MOST USED political Tinder clone{'\n'}in history. Period.
             </Text>
           </View>
 
           <View style={styles.bottomContainer}>
             <Text style={styles.instructions}>
-              Join in seconds and cast your vote.
+              Join in seconds and cast your swipe.
             </Text>
             <Text style={styles.tinyInstructions}>
               We never post anything without your permission.
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   upperInstructions: {
     textAlign: 'center',
     color: colors.tinderRed,
-    ...Font.style('lato-light'),
+    ...Font.style('lato-regular'),
     fontWeight: "300",
     marginBottom: 5,
     fontSize: 16

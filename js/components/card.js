@@ -84,7 +84,7 @@ class Card extends Component {
                     this
                         .pan
                         .setValue({x: 0, y: 0});
-                        this.setState({dragging: true});
+                    this.setState({dragging: true});
                 }
             },
             onPanResponderMove: Animated.event([
@@ -212,6 +212,18 @@ class Card extends Component {
         };
     }
 
+    renderNoteStyle() {
+        return {backgroundColor: colors.red}
+    }
+
+    renderNoteTextStyle() {
+        return {
+            color: colors.white,
+            ...Font.style('lato-semibold'),
+            opacity: 1
+        }
+    }
+
     render() {
         return (
             <Animated.View
@@ -235,29 +247,87 @@ class Card extends Component {
                         styles.headlineText, {
                             textAlign: 'left'
                         }
-                    ]}>{this.props.card.name}, {this.props.card.age}</Text>
+                    ]}>{this.props.card.name.replace(' ', '\u00a0')},{'\u00a0'}{this.props.card.age}</Text>
                     <Text
                         style={[
                         styles.headlineText, {
                             textAlign: 'right',
-                            ...Font.style('lato-light')
+                            marginRight: 15,
                         }
                     ]}>{this.props.card.role}</Text>
                 </Animated.View>
                 <View style={styles.lowerContainer}>
-                    <Text
-                        style={{
-                        alignSelf: 'center',
-                        margin: 20
-                    }}>Majority voted</Text>
-                    <View style={styles.likesContainer}>
-                        <View style={styles.likes}>
-                            <SimpleLineIcons name="dislike" style={styles.icon}/>
-                            <Text></Text>
+                    <View style={styles.notes}>
+                        <View style={styles.noteRow}>
+                            <View
+                                style={[
+                                styles.note, {
+                                    borderRightWidth: .5
+                                },
+                                (this.props.card.nonpolitician)
+                                    ? this.renderNoteStyle()
+                                    : null
+                            ]}>
+                                <Text
+                                    style={[
+                                    styles.noteText,
+                                    (this.props.card.nonpolitician)
+                                        ? this.renderNoteTextStyle()
+                                        : null
+                                ]}>Non-politician</Text>
+                            </View>
+                            <View
+                                style={[
+                                styles.note,
+                                (this.props.card.military)
+                                    ? this.renderNoteStyle()
+                                    : null
+                            ]}>
+                                <Text
+                                    style={[
+                                    styles.noteText,
+                                    (this.props.card.military)
+                                        ? this.renderNoteTextStyle()
+                                        : null
+                                ]}>Military</Text>
+                            </View>
                         </View>
-                        <View style={styles.likes}>
-                            <SimpleLineIcons name="like" style={styles.icon}/>
-                            <Text></Text>
+                        <View style={[styles.noteRow]}>
+                            <View
+                                style={[
+                                styles.note, {
+                                    borderBottomLeftRadius: 5,
+                                    borderRightWidth: .5
+                                },
+                                (this.props.card.bizandfinance)
+                                    ? this.renderNoteStyle()
+                                    : null
+                            ]}>
+                                <Text
+                                    style={[
+                                    styles.noteText,
+                                    (this.props.card.bizandfinance)
+                                        ? this.renderNoteTextStyle()
+                                        : null
+                                ]}>Business & Finance</Text>
+                            </View>
+                            <View
+                                style={[
+                                styles.note, {
+                                    borderBottomRightRadius: 5
+                                },
+                                (this.props.card.climatechangeskeptic)
+                                    ? this.renderNoteStyle()
+                                    : null
+                            ]}>
+                                <Text
+                                    style={[
+                                    styles.noteText,
+                                    (this.props.card.climatechangeskeptic)
+                                        ? this.renderNoteTextStyle()
+                                        : null
+                                ]}>Climate Change Skeptic</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -282,24 +352,51 @@ export default connect(mapStateToProps, mapDispatchToProps)(Card);
 /*************** End Needed for redux mappings on this page  ********************/
 
 const styles = StyleSheet.create({
+    notes: {
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        flex: 1
+    },
+    noteRow: {
+        flexDirection: 'row',
+        flex: 1
+    },
+    note: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: colors.lightred,
+        backgroundColor: 'transparent',
+        borderTopWidth: .5
+    },
+    noteText: {
+        ...Font.style('lato-regular'),
+        fontSize: 12,
+        color: colors.red,
+        opacity: .3
+    },
     container: {
         flexDirection: 'column',
         alignItems: 'center',
         height: 300,
+        backgroundColor:colors.blue,
         width: (width * .9),
         shadowColor: colors.black,
         shadowOffset: {
             width: 2,
             height: 2
         },
-        shadowOpacity: .3,
+        shadowOpacity: .1,
         shadowRadius: 5,
         borderRadius: 3,
+        borderColor:colors.black,
+        borderWidth:.5,
         marginTop: 20
     },
     lowerContainer: {
         flexDirection: 'column',
         alignSelf: 'flex-end',
+        backgroundColor:colors.lightred,
         width: (width * .9),
         flex: 1
     },
@@ -322,12 +419,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 25,
         width: (width * .9),
-        backgroundColor: 'rgba(0,0,0,.45)',
-        marginTop: -50
+        backgroundColor: 'rgba(224,22,43,.55)',
+        marginTop: -47
     },
     headlineText: {
-        marginHorizontal: 15,
-        ...Font.style('lato-regular'),
+        marginLeft: 15,
+        ...Font.style('lato-semibold'),
+        fontSize:13,
         opacity: .95,
         flex: 1,
         color: colors.white
@@ -337,6 +435,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         flex: 1,
+        backgroundColor:colors.red,
         shadowColor: colors.black,
         shadowOffset: {
             width: 1,
@@ -349,7 +448,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: 22,
-        color: colors.tinderRed,
+        color: colors.white,
         marginBottom: -15
     }
 });
