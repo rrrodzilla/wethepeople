@@ -15,6 +15,14 @@ export default {
         },
         cards: [
             {
+                'name': 'Mike Pence',
+                'age': '57',
+                headshot: 'https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/pence.jpg',
+                'index': 1,
+                'comment': 'Has what Mr. Trump lacks: Washington experience',
+                'role': 'Vice-President'
+
+            }, {
                 'name': 'Rudy Giuliani',
                 'age': '72',
                 headshot: 'https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/guiliani.jpg',
@@ -273,17 +281,9 @@ export default {
                 'name': 'Rex Tillerson',
                 'age': '64',
                 headshot: 'https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/tillerson.jpg',
-                'index': 2,
+                'index': 1,
                 'comment': 'Oilman, cosy with Vladimir Putin',
                 'role': 'State Department'
-
-            }, {
-                'name': 'Mike Pence',
-                'age': '57',
-                headshot: 'https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/pence.jpg',
-                'index': 1,
-                'comment': 'Has what Mr. Trump lacks: Washington experience',
-                'role': 'Vice-President'
 
             }
         ],
@@ -291,6 +291,6 @@ export default {
         swipedDirection: "",
         loading: false,
         swiping: false,
-        isFirstLoad: true,
+        isFirstLoad: true
     }
 }

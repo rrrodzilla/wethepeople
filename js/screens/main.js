@@ -37,8 +37,11 @@ class Main extends Component {
     constructor(props) {
         super(props);
 
+        this.yesText = "Alright then!";
+        this.noText = "Hell nope!"
         this.panProfile = new Animated.ValueXY();
-        this.panAlert = new Animated.ValueXY({x:0,y:-40});
+        this.opacityProfile = new Animated.Value(1);
+        this.panAlert = new Animated.ValueXY({x: 0, y: -40});
         this.opacityAlert = new Animated.Value(0);
         this.scaleAlert = new Animated.Value(0);
         this.state = {
@@ -132,8 +135,8 @@ class Main extends Component {
 
     onCardSwipeEnded(direction) {
         (direction == 'right')
-            ? this.setState({alertText: 'Ok!'})
-            : this.setState({alertText: 'Hell no!'});
+            ? this.setState({alertText: this.yesText})
+            : this.setState({alertText: this.noText});
         this.displayAlert(this.props.swipedDirection);
         InteractionManager.runAfterInteractions(() => {
             this
@@ -154,13 +157,15 @@ class Main extends Component {
     }
 
     updateProfile(direction) {
-
+        this
+            .opacityProfile
+            .setValue(0);
         Animated.timing(this.panProfile, {
             toValue: {
                 x: 0,
                 y: 500
             },
-            duration: 250
+            duration: 150
         }).start(() => {
             Animated.timing(this.panProfile, {
                 toValue: {
@@ -169,7 +174,15 @@ class Main extends Component {
                 },
                 easing: Easing.out(Easing.exp),
                 duration: 750
-            }).start();
+            }).start(() => {
+                Animated
+                    .timing(this.opacityProfile, {
+                    toValue: 1,
+                    duration: 150
+                })
+                    .start()
+
+            });
 
         });
     }
@@ -178,6 +191,7 @@ class Main extends Component {
         var [translateX,
             translateY] = [this.panProfile.x, this.panProfile.y];
         return {
+            opacity: this.opacityProfile,
             transform: [{
                     translateX
                 }, {
@@ -205,7 +219,7 @@ class Main extends Component {
 
     renderAlertTextStyle() {
         return {
-            color: (this.state.alertText == 'Ok!')
+            color: (this.state.alertText == this.yesText)
                 ? colors.swipeRight
                 : colors.swipeLeft
         }

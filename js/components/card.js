@@ -15,6 +15,7 @@ import {
     Alert,
     ActivityIndicator,
     Image,
+    InteractionManager,
     View,
     Dimensions
 } from 'react-native';
@@ -42,8 +43,9 @@ class Card extends Component {
         this.state = {
             dragging: false
         }
+
     };
-    componentDidUpdate() {
+    componentWillUpdate() {
 
         if (this.props.card.index == 1) {
             Animated
@@ -62,6 +64,7 @@ class Card extends Component {
     }
 
     componentWillMount() {
+
         // we only want to do this for the top card, hence the test:
         // (this.props.card.index == 1)
         this._panResponder = PanResponder.create({
@@ -74,13 +77,15 @@ class Card extends Component {
             onPanResponderGrant: (evt, gestureState) => {
                 // The guesture has started. Show visual feedback so the user knows what is
                 // happening! gestureState.d{x,y} will be set to zero now
-                this
-                    .pan
-                    .setOffset({x: this.pan.x._value, y: this.pan.y._value});
-                this
-                    .pan
-                    .setValue({x: 0, y: 0});
-                this.setState({dragging: true});
+                if ((this.props.card.index == 1)) {
+                    this
+                        .pan
+                        .setOffset({x: this.pan.x._value, y: this.pan.y._value});
+                    this
+                        .pan
+                        .setValue({x: 0, y: 0});
+                        this.setState({dragging: true});
+                }
             },
             onPanResponderMove: Animated.event([
                 null, {
@@ -91,24 +96,26 @@ class Card extends Component {
             onPanResponderRelease: (evt, gestureState) => {
                 // The user has released all touches while this view is the responder. This
                 // typically means a gesture has succeeded
-                this.panXVal = gestureState.dx;
-                this
-                    .pan
-                    .flattenOffset();
-                if (gestureState.dx <= -dragThreshold) {
-                    this.swipeLeft();
-                } else if (gestureState.dx >= dragThreshold) {
-                    this.swipeRight();
-                } else {
-                    Animated.spring(this.pan, {
-                        toValue: {
-                            x: 0,
-                            y: 0
-                        },
-                        friction: 3
-                    }).start(() => {
-                        // this.setState({dragging: false});
-                    });
+                if ((this.props.card.index == 1)) {
+                    this.panXVal = gestureState.dx;
+                    this
+                        .pan
+                        .flattenOffset();
+                    if (gestureState.dx <= -dragThreshold) {
+                        this.swipeLeft();
+                    } else if (gestureState.dx >= dragThreshold) {
+                        this.swipeRight();
+                    } else {
+                        Animated.spring(this.pan, {
+                            toValue: {
+                                x: 0,
+                                y: 0
+                            },
+                            friction: 3
+                        }).start(() => {
+                            // this.setState({dragging: false});
+                        });
+                    }
                 }
             },
             onShouldBlockNativeResponder: (evt, gestureState) => {
@@ -118,6 +125,7 @@ class Card extends Component {
                 return true;
             }
         });
+        // InteractionManager.runAfterInteractions(() => { });
     }
 
     swipeLeft() {
@@ -131,7 +139,6 @@ class Card extends Component {
             },
             duration: 500
         }).start(() => {
-            // this.setState({dragging: false});
             this
                 .props
                 .onSwipedCardEnded("left");
@@ -149,7 +156,6 @@ class Card extends Component {
             },
             duration: 500
         }).start(() => {
-            // this.setState({dragging: false});
             this
                 .props
                 .onSwipedCardEnded("right");
@@ -239,17 +245,21 @@ class Card extends Component {
                     ]}>{this.props.card.role}</Text>
                 </Animated.View>
                 <View style={styles.lowerContainer}>
-                <Text style={{alignSelf:'center', margin:20}}>Majority voted</Text>
-                <View style={styles.likesContainer}>
-                    <View style={styles.likes}>
+                    <Text
+                        style={{
+                        alignSelf: 'center',
+                        margin: 20
+                    }}>Majority voted</Text>
+                    <View style={styles.likesContainer}>
+                        <View style={styles.likes}>
                             <SimpleLineIcons name="dislike" style={styles.icon}/>
                             <Text></Text>
-                    </View>
-                    <View style={styles.likes}>
+                        </View>
+                        <View style={styles.likes}>
                             <SimpleLineIcons name="like" style={styles.icon}/>
                             <Text></Text>
+                        </View>
                     </View>
-                </View>
                 </View>
             </Animated.View>
         );
@@ -305,7 +315,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: (width * .9),
         margin: 0,
-        marginBottom:20,
+        marginBottom: 20
     },
     headline: {
         flexDirection: 'row',
@@ -340,6 +350,6 @@ const styles = StyleSheet.create({
     icon: {
         fontSize: 22,
         color: colors.tinderRed,
-        marginBottom:-15,
+        marginBottom: -15
     }
 });
