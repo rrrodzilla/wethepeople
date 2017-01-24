@@ -22,7 +22,6 @@ import * as appActions from 'AppActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ActionCreators} from 'ActionsIndex';
-import * as api from 'API';
 import {Exponent, Font} from 'exponent';
 import colors from 'Colors';
 import {Ionicons} from '@exponent/vector-icons';

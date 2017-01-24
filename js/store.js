@@ -11,10 +11,9 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
-import * as api from 'API';
 import initialState from 'InitialState';
 
-const engine = createEngine(api.STORAGE_SAVE_KEY);
+const engine = createEngine("WETHEPEOPLE_STORAGE_SAVE_KEY");
 const middlewares = [thunk];
 const loggerMiddleware = createLogger({
   predicate: (getState, action) => __DEV__
