@@ -11,7 +11,6 @@ export default {
             "profilePic": "none",
             "socialMediaId": "",
             "accountType": "",
-            "stripeSubscriptionPlan": "",
             "registrationDate": ""
         },
         cards: [

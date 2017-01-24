@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import initialState from 'InitialState';
 import Exponent from 'exponent';
 import {Platform} from 'react-native';
+import * as api from 'API';
 import {Permissions, Notifications} from 'exponent';
 import {NavigationContext, NavigationProvider, StackNavigation} from '@exponent/ex-navigation';
 const navigationContext = new NavigationContext({router: Router, store: Store})
@@ -33,6 +34,9 @@ function _logout(state) {
 
 export function logout(state) {
   return async function (dispatch, getState) {
+    //why this thunked method before logout?
+    //you'll probably want to do some things with the account
+    //or various portions based on your backend db.  You'd do this here
     return dispatch(_logout(state));
   }
 }
@@ -64,7 +68,7 @@ export function signInFB() {
     if (type === 'success') {
       Promise.all([
 
-        //additionally you'd want to pull additional FB user data and push into
+        //additionally you'd want to pull additional dispatches for FB user data and push into
         //your choice of persistent storage
         dispatch(login(props.wethepeople.loggedIn))
       ])
