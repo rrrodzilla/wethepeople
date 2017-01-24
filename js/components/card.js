@@ -368,7 +368,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: colors.lightred,
-        backgroundColor: 'transparent',
         borderTopWidth: .5
     },
     noteText: {

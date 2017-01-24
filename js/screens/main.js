@@ -171,24 +171,27 @@ class Main extends Component {
             },
             duration: 500
         }).start(() => {
-            Animated.timing(this.panProfile, {
-                toValue: {
-                    x: 0,
-                    y: 0
-                },
-                delay:500,
-                easing: Easing.out(Easing.exp),
-                duration: 750
-            }).start(() => {
-                Animated
-                    .timing(this.opacityProfile, {
-                    toValue: 1,
-                    duration: 200
-                })
-                    .start()
+            //do this only if there's another card left
+            // if (this.props.cards.length > 1) {
+                Animated.timing(this.panProfile, {
+                    toValue: {
+                        x: 0,
+                        y: 0
+                    },
+                    delay: 500,
+                    easing: Easing.out(Easing.exp),
+                    duration: 750
+                }).start(() => {
+                    Animated
+                        .timing(this.opacityProfile, {
+                        toValue: 1,
+                        duration: 200
+                    })
+                        .start()
 
-            });
+                });
 
+            // }
         });
     }
 
@@ -309,13 +312,13 @@ const styles = StyleSheet.create({
     profileItems: {
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         flex: 1
     },
     profileHeaders: {
         ...Font.style('lato-light'),
         color: colors.blue,
-        marginBottom:15,
+        marginBottom: 15,
         letterSpacing: 1,
         fontSize: 18
     },
