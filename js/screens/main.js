@@ -331,6 +331,8 @@ const styles = StyleSheet.create({
     profileComment: {
         ...Font.style('lato-regular'),
         color: colors.blue,
+        marginHorizontal:15,
+        marginBottom:15,
         fontSize: 18
     },
     profileRole: {
