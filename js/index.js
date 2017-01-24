@@ -75,6 +75,8 @@ class App extends React.Component {
       .map((data, index, cards) => {
         images.push(data.headshot);
       })
+      images.push("https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/trumpWatermark.png");
+      images.push("https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png");
 
       // console.log(images);
 
@@ -86,6 +88,8 @@ class App extends React.Component {
             'lato-black': require('../assets/fonts/Lato-Black.ttf')
           }, {
             'lato-light': require('../assets/fonts/Lato-Light.ttf')
+          }, {
+            'lato-italic': require('../assets/fonts/Lato-Italic.ttf')
           }, {
             'lato-regular': require('../assets/fonts/Lato-Regular.ttf')
           }, {

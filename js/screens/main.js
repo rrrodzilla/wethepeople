@@ -55,7 +55,7 @@ class Main extends Component {
             title: 'We the People',
             titleStyle: {
                 color: colors.white,
-                ...Font.style('lato-light'),
+                ...Font.style('lato-regular'),
                 letterSpacing: 1
             },
             backgroundColor: colors.blue,
@@ -89,6 +89,7 @@ class Main extends Component {
                 return (<Card
                     card={data}
                     key={index}
+                    quotes={this.props.quotes}
                     style={{
                     position: 'absolute',
                     top: 0,
@@ -172,7 +173,7 @@ class Main extends Component {
             duration: 500
         }).start(() => {
             //do this only if there's another card left
-            // if (this.props.cards.length > 1) {
+            if (this.props.cards.length > 0) {
                 Animated.timing(this.panProfile, {
                     toValue: {
                         x: 0,
@@ -191,7 +192,7 @@ class Main extends Component {
 
                 });
 
-            // }
+            }
         });
     }
 
@@ -236,7 +237,12 @@ class Main extends Component {
     render() {
 
         const {state, actions} = this.props;
-        let currentCard = this.props.cards[this.props.cards.length - 1]
+        let currentCard = (this.props.cards.length > 0)
+            ? this.props.cards[this.props.cards.length - 1]
+            : {
+                comment: '',
+                role: ''
+            };
         return (
             <View style={styles.container}>
                 <View style={styles.upperContainer}>
@@ -256,7 +262,8 @@ class Main extends Component {
                     styles.profile, this.renderProfileStyle()
                 ]}>
                     <View style={styles.profileItems}>
-                        <Text style={styles.profileHeaders}>Summary</Text>
+                        <Text style={styles.profileRole}>{currentCard.role}</Text>
+                        <Text style={styles.profileHeaders}>Notes:</Text>
                         <Text style={styles.profileComment}>{currentCard.comment}</Text>
                     </View>
                 </Animated.View>
@@ -267,7 +274,7 @@ class Main extends Component {
 /*************** Needed for redux mappings on this page  ********************/
 //currently only mapping to the user prop which we use for display on this page
 function mapStateToProps(state, ownProps) {
-    return {cards: state.wethepeople.cards, swipedDirection: state.wethepeople.swipedDirection, swiping: state.wethepeople.swiping};
+    return {quotes: state.wethepeople.presidentialQuotes, cards: state.wethepeople.cards, swipedDirection: state.wethepeople.swipedDirection, swiping: state.wethepeople.swiping};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -318,13 +325,18 @@ const styles = StyleSheet.create({
     profileHeaders: {
         ...Font.style('lato-light'),
         color: colors.blue,
-        marginBottom: 15,
         letterSpacing: 1,
-        fontSize: 18
+        fontSize: 14
     },
     profileComment: {
         ...Font.style('lato-regular'),
         color: colors.blue,
+        fontSize: 18
+    },
+    profileRole: {
+        ...Font.style('lato-black'),
+        marginBottom: 15,
+        color: colors.red,
         fontSize: 18
     },
     swipeAlert: {

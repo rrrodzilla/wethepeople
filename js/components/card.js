@@ -29,6 +29,7 @@ import {ActionCreators} from 'ActionsIndex';
 import {Exponent, Font} from 'exponent';
 import colors from 'Colors';
 import {SimpleLineIcons} from '@exponent/vector-icons';
+import {FontAwesome} from '@exponent/vector-icons';
 const {width, height} = Dimensions.get('window');
 const dragThreshold = 150;
 
@@ -41,6 +42,7 @@ class Card extends Component {
         this.opacity = new Animated.Value(0);
         this.pan = new Animated.ValueXY();
         this.panXVal = 0;
+        this.quote = this.getRandomInt(0, this.props.quotes.length - 1)
         this.state = {
             dragging: false
         }
@@ -52,13 +54,13 @@ class Card extends Component {
             Animated
                 .timing(this.opacity, {
                 toValue: 1,
-                duration: 950
+                duration: 2500
             })
                 .start();
             Animated
                 .timing(this.rotation, {
                 toValue: 1,
-                easing:Easing.bounce,
+                easing: Easing.bounce,
                 duration: 300
             })
                 .start();
@@ -234,6 +236,11 @@ class Card extends Component {
             ]}
                 {...this._panResponder.panHandlers}>
                 <Animated.Image
+                    style={styles.watermark}
+                    source={{
+                    uri: "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/trumpWatermark.png"
+                }}/>
+                <Animated.Image
                     style={[
                     styles.headshot, this.renderOpacity()
                 ]}
@@ -249,17 +256,36 @@ class Card extends Component {
                         styles.headlineText, {
                             textAlign: 'left'
                         }
-                    ]}>{this.props.card.name.replace(' ', '\u00a0')},{'\u00a0'}{this.props.card.age}</Text>
-                    <Text
-                        style={[
-                        styles.headlineText, {
-                            textAlign: 'right',
-                            marginRight: 15,
-                        }
-                    ]}>{this.props.card.role}</Text>
+                    ]}>{this
+                            .props
+                            .card
+                            .name
+                            .replace(' ', '\u00a0')},{'\u00a0'}{this.props.card.age}</Text>
                 </Animated.View>
-                <View style={styles.lowerContainer}>
-                    <View style={styles.notes}>
+                <View style={[styles.lowerContainer]}>
+                    <View style={styles.quotes}>
+                        <View style={styles.quote}>
+                            <FontAwesome
+                                name='quote-left'
+                                style={{
+                                margin: 5,
+                                color: colors.red,
+                                fontSize: 22
+                            }}/>
+                            <Text style={styles.quoteText}>{this.props.quotes[this.quote].quote}</Text>
+                            <FontAwesome
+                                name='quote-right'
+                                style={{
+                                margin: 5,
+                                color: colors.red,
+                                fontSize: 22
+                            }}/>
+                        </View>
+                    </View>
+                    <Animated.View
+                        style={[
+                        styles.notes, this.renderOpacity()
+                    ]}>
                         <View style={styles.noteRow}>
                             <View
                                 style={[
@@ -331,7 +357,7 @@ class Card extends Component {
                                 ]}>Climate Change Skeptic</Text>
                             </View>
                         </View>
-                    </View>
+                    </Animated.View>
                 </View>
             </Animated.View>
         );
@@ -368,37 +394,59 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: colors.lightred,
+        backgroundColor:colors.lightred,
         borderTopWidth: .5
     },
     noteText: {
         ...Font.style('lato-regular'),
         fontSize: 12,
-        color: 'rgba(224,22,43,.55)',
+        color: 'rgba(224,22,43,.55)'
     },
     container: {
         flexDirection: 'column',
         alignItems: 'center',
         height: 300,
-        backgroundColor:colors.blue,
+        backgroundColor: colors.blue,
         width: (width * .9),
         shadowColor: colors.black,
         shadowOffset: {
             width: 2,
             height: 2
         },
-        shadowOpacity: .1,
+        shadowOpacity: .3,
         shadowRadius: 5,
         borderRadius: 3,
-        borderColor:colors.black,
-        borderWidth:.5,
+        borderColor: colors.black,
+        borderWidth: .5,
         marginTop: 20
     },
     lowerContainer: {
         flexDirection: 'column',
         alignSelf: 'flex-end',
-        backgroundColor:colors.lightred,
+        backgroundColor: colors.lightred,
         width: (width * .9),
         flex: 1
+    },
+    quotes: {
+        flexDirection: 'row',
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 0,
+        height: 100,
+        backgroundColor: colors.lightred,
+        width: (width * .9)
+    },
+    quote: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flex: 1
+    },
+    quoteText: {
+        textAlign: 'center',
+        width: 225,
+        color: colors.darkred,
+        ...Font.style('lato-italic')
     },
     likesContainer: {
         flexDirection: 'row',
@@ -422,10 +470,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(224,22,43,.35)',
         marginTop: -47
     },
+    watermark: {
+        position: 'absolute',
+        height: 150,
+        width: 150,
+        opacity: .8,
+        resizeMode: 'contain',
+        top: (200 - 150) / 2,
+        left: ((width * .9) - 150) / 2
+    },
     headlineText: {
-        marginLeft: 15,
-        ...Font.style('lato-black'),
-        fontSize:13,
+        marginLeft: 10,
+        ...Font.style('lato-semibold'),
+        fontSize: 16,
+        width: (width * .9) / 2,
         opacity: .95,
         flex: 1,
         color: colors.white
@@ -435,7 +493,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         flex: 1,
-        backgroundColor:colors.red,
+        backgroundColor: colors.red,
         shadowColor: colors.black,
         shadowOffset: {
             width: 1,

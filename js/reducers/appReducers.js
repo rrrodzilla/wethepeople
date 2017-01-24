@@ -25,20 +25,25 @@ export const isFirstLoad = CreateReducer({}, {
     }
 });
 
+export const presidentialQuotes = CreateReducer({}, {
+    ["REDUX_STORAGE_LOAD"](state, action) {
+        return initialState.wethepeople.presidentialQuotes;
+    },
+});
+
 export const cards = CreateReducer({}, {
     ["REDUX_STORAGE_LOAD"](state, action) {
         return initialState.wethepeople.cards;
     },
     [types.SWIPED_CARD_ENDED](state, action) {
-        if (state.length > 1) {
-            var updatedCards = state.slice();
-            updatedCards.pop();
+        var updatedCards = state.slice();
+        updatedCards.pop();
+        console.log(state.length);  
+        if (state.length != 1) {
             var newTopCard = updatedCards[updatedCards.length - 1];
             newTopCard.index = 1;
-            return updatedCards;
-        } else {
-            return state;
         }
+        return updatedCards;
     },
     [types.SWIPED_CARD](state, action) {
         return state;
@@ -67,7 +72,7 @@ export const user = CreateReducer({}, {
         return (typeof action.payload.wethepeople.user.id != 'undefined')
             ? action.payload.wethepeople.user
             : initialState.wethepeople.user;
-    },
+    }
 });
 
 export const loggedIn = CreateReducer({}, {
