@@ -14,7 +14,7 @@
   "loading": {
     "backgroundImageUrl": "https://function962a6c1e8a7e.blob.core.windows.net/wethepeople/logo.png",
     "hideExponentText": true,
-    "backgroundColor" : "#FFFFFF"
+    "backgroundColor" : "#FBFCFD"
   },
   "packagerOpts": {
     "assetExts": [

@@ -290,14 +290,13 @@ const styles = StyleSheet.create({
     },
     profile: {
         flexDirection: 'column',
-        flex: 1,
+        flex: .75,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: .5,
         borderColor: colors.black,
-        padding:-30,
         margin: 15,
-        marginVertical: 10,
+        marginVertical: 25,
         borderRadius: 5,
         shadowColor: colors.black,
         shadowOffset: {
@@ -316,9 +315,8 @@ const styles = StyleSheet.create({
     profileHeaders: {
         ...Font.style('lato-light'),
         color: colors.blue,
-        margin:15,
+        marginBottom:15,
         letterSpacing: 1,
-        fontSize: 18
     },
     profileComment: {
         ...Font.style('lato-regular'),
