@@ -464,6 +464,7 @@ const styles = StyleSheet.create({
     profileHeaders: {
         ...Font.style('lato-light'),
         color: colors.blue,
+        marginBottom: 15,
         letterSpacing: 1,
         fontSize: 14
     },
