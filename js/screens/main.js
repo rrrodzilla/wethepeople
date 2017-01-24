@@ -55,10 +55,10 @@ class Main extends Component {
             title: 'We the People',
             titleStyle: {
                 color: colors.white,
-                ...Font.style('lato-black'),
+                ...Font.style('lato-light'),
                 letterSpacing: 1
             },
-            backgroundColor: colors.tinderRed,
+            backgroundColor: colors.blue,
             renderRight: (route, props) => {
                 return (
                     <View>
@@ -251,46 +251,6 @@ class Main extends Component {
                         <Text style={styles.profileHeaders}>Summary:</Text>
                         <Text style={styles.profileComment}>{currentCard.comment}</Text>
                     </View>
-                    <View style={styles.notes}>
-                        <View style={styles.noteRow}>
-                            <View
-                                style={[
-                                styles.note, {
-                                    backgroundColor: colors.nonpolitician
-                                }
-                            ]}>
-                                <Text style={styles.noteText}>Non-politician</Text>
-                            </View>
-                            <View
-                                style={[
-                                styles.note, {
-                                    backgroundColor: colors.military
-                                }
-                            ]}>
-                                <Text style={styles.noteText}>Military</Text>
-                            </View>
-                        </View>
-                        <View style={[styles.noteRow]}>
-                            <View
-                                style={[
-                                styles.note, {
-                                    backgroundColor: colors.bizandfinance,
-                                    borderBottomLeftRadius: 5
-                                }
-                            ]}>
-                                <Text style={styles.noteText}>Business & Finance</Text>
-                            </View>
-                            <View
-                                style={[
-                                styles.note, {
-                                    backgroundColor: colors.climatechange,
-                                    borderBottomRightRadius: 5
-                                }
-                            ]}>
-                                <Text style={styles.noteText}>Climate Change Skeptic</Text>
-                            </View>
-                        </View>
-                    </View>
                 </Animated.View>
             </View>
         );
@@ -325,49 +285,39 @@ const styles = StyleSheet.create({
     },
     profile: {
         flexDirection: 'column',
-        height: 150,
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center',
         borderWidth: .5,
-        borderColor: colors.tinderRed,
+        borderColor: colors.black,
         margin: 15,
-        borderRadius: 5
-
+        marginVertical: 10,
+        borderRadius: 5,
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 5,
+            height: 5
+        },
+        shadowOpacity: .8,
+        shadowRadius: 5
     },
     profileItems: {
         flexDirection: 'column',
-        padding: 10,
+        padding: 40,
         paddingTop: 5,
         alignSelf: 'stretch',
         flex: 1
     },
     profileHeaders: {
         ...Font.style('lato-semibold'),
-        color: colors.tinderRed,
+        color: colors.blue,
         letterSpacing: 1,
-        fontSize: 16
+        fontSize: 18
     },
     profileComment: {
-        ...Font.style('lato-light'),
-        color: colors.darkred,
-        fontSize: 14
-    },
-    notes: {
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        flex: 1
-    },
-    noteRow: {
-        flexDirection: 'row',
-        flex: 1
-    },
-    note: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    noteText: {
-        ...Font.style('lato-light'),
-        fontSize: 12,
-        color: colors.white
+        ...Font.style('lato-regular'),
+        color: colors.blue,
+        fontSize: 16
     },
     swipeAlert: {
         alignSelf: 'center',
