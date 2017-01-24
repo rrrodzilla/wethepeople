@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
     noteText: {
         ...Font.style('lato-regular'),
         fontSize: 12,
-        color: 'rgba(224,22,43,.55)'
+        color: 'rgba(224,22,43,.55)',
     },
     container: {
         flexDirection: 'column',
