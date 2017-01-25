@@ -380,7 +380,7 @@ class Main extends Component {
                     styles.profile, this.renderProfileStyle()
                 ]}>
                     <View style={styles.profileItems}>
-                        <Text style={styles.profileRole}>{currentCard.role}</Text>
+                        <Text style={styles.profileRole}> ~ {currentCard.role} ~</Text>
                         <Text style={styles.profileHeaders}>Notes:</Text>
                         <Text style={styles.profileComment}>{currentCard.comment}</Text>
                     </View>
@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
     profileHeaders: {
         ...Font.style('lato-light'),
         color: colors.blue,
-        marginBottom: 15,
+        marginBottom: 10,
         letterSpacing: 1,
         fontSize: 14
     },
