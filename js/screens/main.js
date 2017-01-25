@@ -477,7 +477,8 @@ const styles = StyleSheet.create({
     },
     profileRole: {
         ...Font.style('lato-black'),
-        marginBottom: 15,
+        marginBottom: 5,
+        backgroundColor:'transparent',
         color: colors.red,
         fontSize: 18
     },
