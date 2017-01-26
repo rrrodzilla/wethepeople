@@ -16,6 +16,7 @@ Try it here: [https://getexponent.com/@rrrodzilla/WethePeople](https://getexpone
   - Pan-responder for gestures and dragging
   - Timed, spring and parallel animations
   - The teeny-tiny hands of our Commander in Chief
+  - Showcases gaudy design in recognition of the tastes of our 45th President
 
 
 
