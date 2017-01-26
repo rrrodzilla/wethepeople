@@ -1,5 +1,5 @@
 # We The People
-A tinder like React-Native app built on the Exponent framework featuring Donald Trump's proposed cabinet-level and senior White House officials (and family members).
+A tinder like React-Native app built on the Exponent framework featuring Donald Trump's proposed cabinet-level and senior White House officials.
 
 ## Installation
 Try it here: [https://getexponent.com/@rrrodzilla/WethePeople](https://getexponent.com/@rrrodzilla/WethePeople "We the People")
